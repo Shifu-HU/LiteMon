@@ -33,7 +33,7 @@ jobs:
       - name: Publish single-file exe
         run: >
           dotnet publish src\LiteMon.Wpf\LiteMon.Wpf.csproj
-          -c Release -r win-x64 --self-contained true --no-build
+          -c Release -r win-x64 --self-contained true
           -p:PublishSingleFile=true
           -p:IncludeNativeLibrariesForSelfExtract=true
           -p:EnableCompressionInSingleFile=false
