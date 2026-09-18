@@ -1,0 +1,74 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore LiteMon.sln
+
+      - name: Build (Release)
+        run: dotnet build LiteMon.sln -c Release --no-restore
+
+      - name: Test
+        run: dotnet test tests\LiteMon.Core.Tests\LiteMon.Core.Tests.csproj -c Release --no-build --nologo
+
+      - name: Publish single-file exe
+        run: >
+          dotnet publish src\LiteMon.Wpf\LiteMon.Wpf.csproj
+          -c Release -r win-x64 --self-contained true --no-build
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=false
+          -o publish
+
+      - name: Pack portable zip
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path stage | Out-Null
+          Copy-Item publish\LiteMon.exe stage\LiteMon.exe
+          Compress-Archive -Path stage\* -DestinationPath LiteMon-v${{ github.ref_name }}-win-x64.zip -Force
+
+      - name: Install Inno Setup
+        run: choco install innosetup -y --no-progress
+
+      - name: Compile installer
+        shell: pwsh
+        run: |
+          $ver = "${{ github.ref_name }}" -replace '^v',''
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /DMyAppVersion=$ver installer.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: LiteMon-${{ github.ref_name }}
+          path: |
+            installer/*.exe
+            *.zip
+
+      - name: Attach to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            installer/LiteMon-Setup-*.exe
+            LiteMon-*-win-x64.zip
+          generate_release_notes: true
