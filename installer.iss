@@ -2,7 +2,10 @@
 ; Saved as UTF-8 with BOM for Chinese strings.
 
 #define MyAppName "LiteMon"
-#define MyAppVersion "0.2.0"
+; 版本可由 CI 传入: ISCC installer.iss /DMyAppVersion=x.y.z
+#ifndef MyAppVersion
+  #define MyAppVersion "0.2.0"
+#endif
 #define MyAppExeName "LiteMon.exe"
 
 [Setup]
