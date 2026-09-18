@@ -1,0 +1,28 @@
+# ---- 构建产物 ----
+bin/
+obj/
+publish/
+artifacts/
+*.pdb
+*.exe
+*.dll
+!tests/**/*.dll
+
+# ---- IDE / 工具 ----
+.vs/
+.vscode/
+.idea/
+*.user
+*.DotSettings.user
+
+# ---- 测试与临时输出 ----
+TestResults/
+tests/_shots/
+*.bin
+*.vhd
+*.vhdx
+
+# ---- 系统 ----
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,79 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- ============ 字体 ============ -->
+    <FontFamily x:Key="Font.Main">Microsoft YaHei UI, Segoe UI, Microsoft YaHei, PingFang SC</FontFamily>
+
+    <!-- ============ 主题令牌（默认深色；ThemeManager 运行时切换）============ -->
+    <sys:Boolean x:Key="IsDark">True</sys:Boolean>
+
+    <!-- 背景/表面 -->
+    <SolidColorBrush x:Key="Brush.WindowBg" Color="#F2141622"/>
+    <SolidColorBrush x:Key="Brush.WindowBgSolid" Color="#FF141622"/>
+    <SolidColorBrush x:Key="Brush.Card" Color="#1A2332"/>
+    <SolidColorBrush x:Key="Brush.CardBorder" Color="#33465F"/>
+    <SolidColorBrush x:Key="Brush.CardHover" Color="#223146"/>
+    <SolidColorBrush x:Key="Brush.TopBar" Color="#F2101A2E"/>
+    <SolidColorBrush x:Key="Brush.NavBar" Color="#F20D1526"/>
+    <SolidColorBrush x:Key="Brush.MenuBg" Color="#F2162030"/>
+
+    <!-- 文本 -->
+    <SolidColorBrush x:Key="Brush.Text" Color="#E9F1FF"/>
+    <SolidColorBrush x:Key="Brush.TextSub" Color="#8A97B5"/>
+    <SolidColorBrush x:Key="Brush.TextDim" Color="#5D6B8A"/>
+
+    <!-- 强调 -->
+    <SolidColorBrush x:Key="Brush.Accent" Color="#3B82F6"/>
+    <SolidColorBrush x:Key="Brush.Accent2" Color="#38BDF8"/>
+    <SolidColorBrush x:Key="Brush.Accent3" Color="#818CF8"/>
+    <SolidColorBrush x:Key="Brush.AccentSoft" Color="#2E5AAC"/>
+    <SolidColorBrush x:Key="Brush.OnAccent" Color="#FFFFFF"/>
+
+    <!-- 状态色 -->
+    <SolidColorBrush x:Key="Brush.Cyan" Color="#22D3EE"/>
+    <SolidColorBrush x:Key="Brush.Green" Color="#34D399"/>
+    <SolidColorBrush x:Key="Brush.Orange" Color="#FBBF24"/>
+    <SolidColorBrush x:Key="Brush.Red" Color="#F87171"/>
+    <SolidColorBrush x:Key="Brush.Purple" Color="#A78BFA"/>
+
+    <SolidColorBrush x:Key="Brush.Cpu" Color="#38BDF8"/>
+    <SolidColorBrush x:Key="Brush.Gpu" Color="#A78BFA"/>
+    <SolidColorBrush x:Key="Brush.Ram" Color="#34D399"/>
+    <SolidColorBrush x:Key="Brush.Net" Color="#22D3EE"/>
+
+    <!-- 控件表面 -->
+    <SolidColorBrush x:Key="Brush.Hover" Color="#14FFFFFF"/>
+    <SolidColorBrush x:Key="Brush.Press" Color="#1FFFFFFF"/>
+    <SolidColorBrush x:Key="Brush.InputBg" Color="#0FFFFFFF"/>
+    <SolidColorBrush x:Key="Brush.InputBorder" Color="#29FFFFFF"/>
+    <SolidColorBrush x:Key="Brush.Divider" Color="#1AFFFFFF"/>
+    <SolidColorBrush x:Key="Brush.Scroll" Color="#2EFFFFFF"/>
+    <SolidColorBrush x:Key="Brush.BarBg" Color="#26324808"/>
+    <SolidColorBrush x:Key="Brush.Track" Color="#293042"/>
+
+    <!-- 图表 -->
+    <SolidColorBrush x:Key="Brush.ChartGrid" Color="#16FFFFFF"/>
+
+    <!-- ============ 尺寸/圆角 ============ -->
+    <CornerRadius x:Key="Radius.Card">12</CornerRadius>
+    <CornerRadius x:Key="Radius.Chip">999</CornerRadius>
+    <CornerRadius x:Key="Radius.Input">8</CornerRadius>
+    <sys:Double x:Key="Size.Title">18</sys:Double>
+    <sys:Double x:Key="Size.Body">13</sys:Double>
+    <sys:Double x:Key="Size.Sub">11</sys:Double>
+    <sys:Double x:Key="Size.Big">26</sys:Double>
+
+    <!-- ============ 样式基元 ============ -->
+    <Style x:Key="Txt" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource Font.Main}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text}"/>
+    </Style>
+    <Style x:Key="TxtSub" TargetType="TextBlock" BasedOn="{StaticResource Txt}">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextSub}"/>
+        <Setter Property="FontSize" Value="{StaticResource Size.Sub}"/>
+    </Style>
+    <Style x:Key="TxtDim" TargetType="TextBlock" BasedOn="{StaticResource Txt}">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.TextDim}"/>
+    </Style>
+</ResourceDictionary>
